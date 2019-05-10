@@ -1,6 +1,6 @@
 # Project: linux-server 
 
-Live at 52.66.214.34
+Live at 52.66.214.34.xip.io
 
 What is this project all about?
 
@@ -46,10 +46,9 @@ Deploy the Item Catalog project.
 13. Clone and setup your Item Catalog project from the Github repository.
 14. Set it up in your server so that it functions correctly when visiting your server’s IP address in a browser.
 
-##Steps to configure linux server
 
-
-#How to ssh into remote instance
+How to ssh into remote instance
+------------------------------------
 
 Generate private public using ssh-keygen: $ssh-keygen
 Its asks for file to save keys, by default it will save in id_rsa and id_rsa.pub
@@ -57,7 +56,9 @@ Download .pem file from lightsail account dashboard and save it in local machine
 
 Now you can ssh to remote machine using : $ ssh -i path/to/pem/file ubuntu@ip-addr
 
-##Create a new user named grader
+Create a new user named grader
+------------------------------------
+
 sudo adduser grader
 sudo vi /etc/sudoers.d/grader and add grader ALL=(ALL:ALL) ALL into this file and save it.
 
@@ -73,39 +74,52 @@ $service ssh restart
 
 ssh -i private_key grader@52.66.214.34/
 
-##Update packages
+Update packages
+------------------------------------
+
 sudo apt-get update
 sudo apt-get upgrade
-##Change the SSH port from 22 to 2200
+
+Change the SSH port from 22 to 2200
+------------------------------------
+
 Use sudo vi /etc/ssh/sshd_config and then change Port 22 to Port 2200.
 $sudo service ssh restart
 
-##Lets configure the firewall now
+Lets configure the firewall now
+------------------------------------
 
 sudo ufw allow 2200/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 123/udp
 sudo ufw enable 
 
-##Configure the local timezone to UTC
+Configure the local timezone to UTC
+------------------------------------
 
 $sudo dpkg-reconfigure tzdata
 select UTC from popout list
 
 
-##Install and configure Apache to serve a Python mod_wsgi application
+Install and configure Apache to serve a Python mod_wsgi application
+------------------------------------
+
 $sudo apt-get install apache2
 $sudo apt-get install python-setuptools libapache2-mod-wsgi
 $sudo service apache2 restart
 
 
-##Install and configure PostgreSQL
+Install and configure PostgreSQL
+------------------------------------
+
 $sudo apt-get install postgresql
 
 In order to check for remote connections, do the following 
 $sudo vim /etc/postgresql/9.3/main/pg_hba.conf
 
-##Login to postgres now
+Login to postgres now
+------------------------------------
+
 $sudo su - postgres
 In postgres shell run $psql
 
@@ -124,16 +138,18 @@ postgres=# \q
 
 get back to home user now.
 
-##Git
+Git
+------------------------------------
+
 $sudo apt-get install git
 $cd /var/www
-$sudo mkdir FlaskApp
-$cd FlaskApp
+$sudo mkdir CatalogFlaskApp
+$cd CatalogFlaskApp
 $git clone https://github.com/shashi95/item-catalog
-$sudo mv item-catalog FlaskApp
+$sudo mv item-catalog itemcatalog
 
 Since we are using python 2.7 we must need to change name of our application file 
-$sudo mv FlaskApp/views.py __init__.py
+$sudo mv itemcatalog/views.py __init__.py
 
 Change few lines in database_setup.py, __init__.py and populate_db.py files
 from engine = create_engine('sqlite:///sport.db') to engine = create_engine('postgresql://catalog:password@localhost/catalog')
@@ -146,20 +162,20 @@ $sudo python database_setup.py
 
 
 New vitual host setup
-$sudo vi /etc/apache2/sites-available/FlaskApp.conf
+$sudo vi /etc/apache2/sites-available/catalogflaskApp.conf
 
 Add the following lines of code here:
 
 <VirtualHost *:80>
-	ServerName 52.66.214.34
+	ServerName 52.66.214.34.xip.io
 	ServerAdmin youremail@gmail.com
-	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
-	<Directory /var/www/FlaskApp/FlaskApp/>
+	WSGIScriptAlias / /var/www/CatalogFlaskApp/catalogflaskapp.wsgi
+	<Directory /var/www/CatalogFlaskApp/itemcatalog/>
 		Order allow,deny
 		Allow from all
 	</Directory>
-	Alias /static /var/www/FlaskApp/FlaskApp/static
-	<Directory /var/www/FlaskApp/FlaskApp/static/>
+	Alias /static /var/www/CatalogFlaskApp/itemcatalog/static
+	<Directory /var/www/CatalogFlaskApp/itemcatalog/static/>
 		Order allow,deny
 		Allow from all
 	</Directory>
@@ -170,7 +186,7 @@ Add the following lines of code here:
 
 
 $sudo a2ensite FlaskApp
-$sudo vi /var/www/FlaskApp/flaskapp.wsgi 
+$sudo vi /var/www/CatalogFlaskApp/catalogflaskapp.wsgi 
 
 add below code to flaskapp.wsgi file:
 
@@ -178,7 +194,7 @@ add below code to flaskapp.wsgi file:
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0,"/var/www/FlaskApp/")
+sys.path.insert(0,"/var/www/CatalogFlaskApp/")
 
 from FlaskApp import app as application
 application.secret_key = 'Add your secret key'
