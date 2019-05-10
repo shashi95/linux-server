@@ -57,7 +57,7 @@ zope.interface==4.0.5
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-System Environment System
+System Environment settings
 -----------------------------------
 1. Start a new Ubuntu Linux server instance on Amazon Lightsail (https://lightsail.aws.amazon.com/).
 2. Follow the instructions provided to SSH into your server.
