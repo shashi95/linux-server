@@ -1,6 +1,8 @@
 # Project: linux-server 
 
-Live at 52.66.214.34.xip.io
+ip addess - 52.66.214.34
+ssh port  - 2200
+Hosted web link -  http://52.66.214.34.xip.io/
 
 What is this project all about?
 
@@ -9,6 +11,51 @@ Baseline installation of a Linux server and prepare it to host your web applicat
 Why this project?
 -------------------
 A deep understanding of exactly what your web applications are doing, how they are hosted, and the interactions between multiple systems are what define you as a Full Stack Web Developer. In this project, you’ll be responsible for turning a brand-new, bare bones, Linux server into the secure and efficient web application host your applications need.
+
+Required software to be instaaled on the system
+----------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Cheetah==2.4.4
+Flask==0.9
+Jinja2==2.6
+PAM==0.4.2
+PyYAML==3.10
+SQLAlchemy==0.7.4
+Twisted-Core==13.2.0
+Twisted-Names==13.2.0
+Twisted-Web==13.2.0
+Werkzeug==0.10.4
+apt-xapian-index==0.45
+argparse==1.2.1
+chardet==2.0.1
+cloud-init==0.7.5
+colorama==0.2.5
+configobj==4.7.2
+html5lib==0.999
+httplib2==0.9
+jsonpatch==1.3
+jsonpointer==1.0
+oauth==1.0.1
+oauth2client==1.4
+prettytable==0.7.2
+psycopg2==2.4.5
+pyOpenSSL==0.13
+pyasn1==0.1.7
+pyasn1-modules==0.0.5
+pycurl==7.19.3
+pyserial==2.6
+python-apt==0.9.3.5ubuntu1
+python-debian==0.1.21-nmu2ubuntu2
+requests==2.6.0
+rsa==3.1.4
+six==1.9.0
+ssh-import-id==3.21
+urllib3==1.7.1
+wheel==0.24.0
+wsgiref==0.1.2
+zope.interface==4.0.5
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 System Environment System
 -----------------------------------
