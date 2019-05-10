@@ -6,12 +6,12 @@ What is this project all about?
 
 Baseline installation of a Linux server and prepare it to host your web applications. You will secure your server from a number of attack vectors, install and configure a database server, and deploy one of your existing web applications onto it.
 
-##Why this project?
-
+Why this project?
+-------------------
 A deep understanding of exactly what your web applications are doing, how they are hosted, and the interactions between multiple systems are what define you as a Full Stack Web Developer. In this project, you’ll be responsible for turning a brand-new, bare bones, Linux server into the secure and efficient web application host your applications need.
 
-##This is what we are going to do.
-
+System Environment System
+-----------------------------------
 1. Start a new Ubuntu Linux server instance on Amazon Lightsail (https://lightsail.aws.amazon.com/).
 2. Follow the instructions provided to SSH into your server.
 
@@ -38,7 +38,7 @@ Prepare to deploy your project.
 
 Do not allow remote connections
 ----------------------------------
-###Create a new database user named catalog that has limited permissions to your catalog application database.
+Create a new database user named catalog that has limited permissions to your catalog application database.
 12. Install git.
 
 Deploy the Item Catalog project.
@@ -63,10 +63,10 @@ sudo adduser grader
 sudo vi /etc/sudoers.d/grader and add grader ALL=(ALL:ALL) ALL into this file and save it.
 
 generate ssh key on local and follow below steps
-$ su - grader
-$ mkdir .ssh
-$ sudo vi .ssh/authorized_keys
-Copy the public key generated on your local machine to this file and save
+* $ su - grader
+* $ mkdir .ssh
+* $ sudo vi .ssh/authorized_keys
+* Copy the public key generated on your local machine to this file and save
 We can now ssh as grader user using private key generated in above step.
 
 $ chmod 600 .ssh/authorized_keys
@@ -165,7 +165,7 @@ New vitual host setup
 $sudo vi /etc/apache2/sites-available/catalogflaskApp.conf
 
 Add the following lines of code here:
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <VirtualHost *:80>
 	ServerName 52.66.214.34.xip.io
 	ServerAdmin youremail@gmail.com
@@ -183,19 +183,20 @@ Add the following lines of code here:
 	LogLevel warn
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $sudo a2ensite FlaskApp
 $sudo vi /var/www/CatalogFlaskApp/catalogflaskapp.wsgi 
 
 add below code to flaskapp.wsgi file:
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #!/usr/bin/python
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/CatalogFlaskApp/")
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 from FlaskApp import app as application
 application.secret_key = 'Add your secret key'
 
