@@ -12,7 +12,7 @@ Why this project?
 -------------------
 A deep understanding of exactly what your web applications are doing, how they are hosted, and the interactions between multiple systems are what define you as a Full Stack Web Developer. In this project, you’ll be responsible for turning a brand-new, bare bones, Linux server into the secure and efficient web application host your applications need.
 
-Required software to be instaaled on the system
+Required software to be installed on the system
 ----------------------------------------------------
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Cheetah==2.4.4
