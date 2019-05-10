@@ -1,8 +1,8 @@
 # Project: linux-server 
 
-ip addess - 52.66.214.34
-ssh port  - 2200
-Hosted web link -  http://52.66.214.34.xip.io/
+* ip addess - 52.66.214.34
+* ssh port  - 2200
+* Hosted web link -  http://52.66.214.34.xip.io/
 
 What is this project all about?
 
