@@ -3,8 +3,11 @@
 * ip addess - 52.66.214.34
 * ssh port  - 2200
 * Hosted web link -  http://52.66.214.34.xip.io/
+* App directory - /var/www/CatalogFlaskApp/
+* grader user password - 12345
 
 What is this project all about?
+----------------------------------------
 
 Baseline installation of a Linux server and prepare it to host your web applications. You will secure your server from a number of attack vectors, install and configure a database server, and deploy one of your existing web applications onto it.
 
@@ -106,20 +109,26 @@ Now you can ssh to remote machine using : $ ssh -i path/to/pem/file ubuntu@ip-ad
 Create a new user named grader
 ------------------------------------
 
-sudo adduser grader
-sudo vi /etc/sudoers.d/grader and add grader ALL=(ALL:ALL) ALL into this file and save it.
+* $sudo adduser grader
+* $sudo vi /etc/sudoers.d/grader 
+* add grader ALL=(ALL:ALL) ALL into this file and save it.
+* $id grader: uid=1001(grader) gid=1001(grader) groups=1001(grader),27(sudo)
+
 
 generate ssh key on local and follow below steps
 * $ su - grader
 * $ mkdir .ssh
 * $ sudo vi .ssh/authorized_keys
-* Copy the public key generated on your local machine to this file and save
-We can now ssh as grader user using private key generated in above step.
+* copy /home/grader/.ssh/id_rsa.pub to /home/grader/.ssh/authorized_keys
+* $ chmod 600 .ssh/authorized_keys
+* $service ssh restart
+* Now using private key, we can access grader user.
+* ssh -i private_key grader@52.66.214.34/
 
-$ chmod 600 .ssh/authorized_keys
-$service ssh restart
-
-ssh -i private_key grader@52.66.214.34/
+Disbale root login remotely
+----------------------------------
+* sudo vi /etc/ssh/sshd_config
+* Set PermitRootLogin no, save and quit.
 
 Update packages
 ------------------------------------
@@ -135,11 +144,13 @@ $sudo service ssh restart
 
 Lets configure the firewall now
 ------------------------------------
-
-sudo ufw allow 2200/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 123/udp
-sudo ufw enable 
+* sudo apt-get install ufw
+* sudo ufw default allow outgoing
+* sudo ufw default deny incoming
+* sudo ufw allow 2200/tcp
+* sudo ufw allow 80/tcp
+* sudo ufw allow 123/udp
+* sudo ufw enable 
 
 Configure the local timezone to UTC
 ------------------------------------
@@ -249,3 +260,9 @@ application.secret_key = 'Add your secret key'
 
 $sudo service apache2 restart
 
+Third party resources
+------------------------------
+* https://www.tecmint.com/disable-root-login-in-linux/
+* https://www.linode.com/docs/security/firewalls/configure-firewall-with-ufw/
+* https://askubuntu.com/questions/94102/what-is-the-difference-between-apt-get-update-and-upgrade
+* https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
