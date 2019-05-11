@@ -1,8 +1,8 @@
 # Project: linux-server 
 
-* ip addess - 52.66.214.34
+* ip addess - 52.66.192.4
 * ssh port  - 2200
-* Hosted web link -  http://52.66.214.34.xip.io/
+* Hosted web link -  http://52.66.192.4.xip.io/
 * App directory - /var/www/CatalogFlaskApp/
 * grader user password - 12345
 
